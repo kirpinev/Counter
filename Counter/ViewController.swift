@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     @IBOutlet private weak var increaseButton: UIButton!
     @IBOutlet private weak var decreaseButton: UIButton!
     @IBOutlet private weak var resetButton: UIButton!
@@ -34,22 +34,6 @@ class ViewController: UIViewController {
         historyTextView.isEditable = false
     }
 
-    @IBAction private func reset() {
-        updateCounter(to: 0, with: .reset)
-    }
-    
-    @IBAction private func increase() {
-        updateCounter(to: counter + 1, with: .increase)
-    }
-    
-    @IBAction private func decrese() {
-        if counter > 0 {
-            updateCounter(to: counter - 1, with: .decrease)
-        } else {
-            updateHistory(with: .error)
-        }
-    }
-    
     private func updateCounter(to newValue: Int, with status: HistoryStatus) {
         counter = newValue
         updateHistory(with: status)
@@ -70,6 +54,22 @@ class ViewController: UIViewController {
         let range = NSRange(location: historyTextView.text.count - 1, length: 0)
         
         historyTextView.scrollRangeToVisible(range)
+    }
+    
+    @IBAction private func reset() {
+        updateCounter(to: 0, with: .reset)
+    }
+    
+    @IBAction private func increase() {
+        updateCounter(to: counter + 1, with: .increase)
+    }
+    
+    @IBAction private func decrease() {
+        if counter > 0 {
+            updateCounter(to: counter - 1, with: .decrease)
+        } else {
+            updateHistory(with: .error)
+        }
     }
 }
 
